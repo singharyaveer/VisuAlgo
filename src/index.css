@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #060d1f;
+  --bg-surface: #0d1a35;
+  --bg-card: #112244;
+  --accent: #00d4ff;
+  --accent-glow: rgba(0, 212, 255, 0.3);
+  --border: rgba(0, 212, 255, 0.2);
+  --text-primary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --green: #22c55e;
+  --red: #ef4444;
+  --yellow: #facc15;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+/* Custom glowing accent button */
+.btn-accent {
+  background: linear-gradient(135deg, #0066cc, #00aaff);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(0, 170, 255, 0.4);
+}
+.btn-accent:hover:not(:disabled) {
+  box-shadow: 0 0 24px rgba(0, 170, 255, 0.7);
+  transform: translateY(-1px);
+}
+.btn-accent:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Card surface */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* Glow text */
+.glow-text {
+  color: var(--accent);
+  text-shadow: 0 0 12px var(--accent-glow), 0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+/* Range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #00aaff var(--val, 50%), #1e3a5f var(--val, 50%));
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.9);
+}
+input[type="range"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+input[type="range"]:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+/* Select */
+select {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Bar */
+.sort-bar {
+  flex-shrink: 0;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.06s ease, background-color 0.06s ease;
+}
+
+/* Scanline overlay effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Algorithm card hover */
+.algo-card {
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.algo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.2);
+}
+.algo-card.selected {
+  border-color: var(--accent) !important;
+  background: rgba(0, 212, 255, 0.08);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Animation for bars "done" state */
+@keyframes barDone {
+  0% { background-color: #22c55e; }
+  50% { background-color: #00d4ff; }
+  100% { background-color: #22c55e; }
+}
+.bar-done {
+  animation: barDone 0.5s ease;
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
